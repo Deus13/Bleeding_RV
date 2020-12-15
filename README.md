@@ -9,7 +9,7 @@ I makes:
 6) Wildlife now slowly regens HP so wounds will disapear after some time. 
 
 
-This is a mod for **The Long Dark** 1.56 by Hinterland Games Studio, Inc.
+This is a mod for **The Long Dark** 1.9 by Hinterland Games Studio, Inc.
 
 
 
