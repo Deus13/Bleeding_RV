@@ -33,7 +33,7 @@ namespace Bleeding_RV
 
                 ba.m_DeathAfterBleeingOutMinutes = BleedOutMintues;
 
-                Implementation.Log(BleedOutMintues.ToString() + "     " + ba.m_CurrentHP.ToString());
+                //Implementation.Log(BleedOutMintues.ToString() + "     " + ba.m_CurrentHP.ToString());
 
                 if (ba.m_CurrentHP <= 0)
                 {
