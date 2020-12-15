@@ -10,22 +10,24 @@ namespace Bleeding_RV
         public static float BleedOutMintuesTmp;
         private static void Prefix(BaseAi __instance, float damage,ref float bleedOutMintues, DamageSource damageSource, string collider)
         {
-            bleedOutMintues *= UnityEngine.Random.Range(0,1f)+ UnityEngine.Random.Range(0, 1f);
-            BleedOutMintuesTmp = (float)AccessTools.Field(typeof(BaseAi), "m_DeathAfterBleeingOutMinutes").GetValue(__instance);
+            
+            bleedOutMintues *= UnityEngine.Random.Range(0,1f)+ UnityEngine.Random.Range(0, 1f);         
+            BleedOutMintuesTmp = __instance.m_DeathAfterBleeingOutMinutes;
+            //Implementation.Log($"BleedOutMintuesTmp: {BleedOutMintuesTmp}");
+
         }
         private static void Postfix(BaseAi __instance, float damage, float bleedOutMintues, DamageSource damageSource, string collider)
         {
-            //Implementation.Log("post");
-
+           
             if (BleedOutMintuesTmp > 0)
             {
                 float b1 = bleedOutMintues;
                 float b2 = BleedOutMintuesTmp - __instance.m_ElapsedBleedingOutMinutes;
                 float bn = b1 * b2 / (b1 + b2);
                 bn += __instance.m_ElapsedBleedingOutMinutes;
-                AccessTools.Field(typeof(BaseAi), "m_DeathAfterBleeingOutMinutes").SetValue(__instance, bn);
+                __instance.m_DeathAfterBleeingOutMinutes = bn;
 
-                //Implementation.Log(bn.ToString() + "     " + __instance.m_CurrentHP.ToString());
+               // Implementation.Log(bn.ToString() + "     " + __instance.m_CurrentHP.ToString());
             }
             //Implementation.Log(bleedOutMintues.ToString() + "     " + __instance.m_CurrentHP.ToString());
         }
@@ -36,7 +38,9 @@ namespace Bleeding_RV
     {
         private static void Postfix(BaseAi __instance, float realtimeSeconds)
         {
+
             float Minutes = GameManager.GetTimeOfDayComponent().GetTODMinutes(realtimeSeconds);
+
             Implementation.UpdateWounds(__instance, Minutes);
 
 

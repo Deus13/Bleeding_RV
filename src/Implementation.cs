@@ -18,7 +18,7 @@ namespace Bleeding_RV
             
             if (ba.IsBleedingOut())
             {
-                float BleedOutMintues = (float)AccessTools.Field(typeof(BaseAi), "m_DeathAfterBleeingOutMinutes").GetValue(ba);
+                float BleedOutMintues = ba.m_DeathAfterBleeingOutMinutes; 
 
 
                 ba.m_CurrentHP -= ba.m_MaxHP * mins / BleedOutMintues;
@@ -26,27 +26,27 @@ namespace Bleeding_RV
                 BleedOutMintues *= Mathf.Exp(mins / (60f));
                 if (BleedOutMintues > 500000f)
                 {
-                    AccessTools.Field(typeof(BaseAi), "m_BleedingOut").SetValue(ba, false);
+                    ba.m_BleedingOut = false;
                     BleedOutMintues = 0;
                     ba.m_ElapsedBleedingOutMinutes = 0;
                 }
 
-                AccessTools.Field(typeof(BaseAi), "m_DeathAfterBleeingOutMinutes").SetValue(ba, BleedOutMintues);
-
+                ba.m_DeathAfterBleeingOutMinutes = BleedOutMintues;
 
                 Implementation.Log(BleedOutMintues.ToString() + "     " + ba.m_CurrentHP.ToString());
 
                 if (ba.m_CurrentHP <= 0)
                 {
                     ba.m_CurrentHP = 0;
-                    BaseAi.DamageSide damageSide = (BaseAi.DamageSide)AccessTools.Field(typeof(BaseAi), "m_LastDamageSide").GetValue(ba);
-                    int Part = (int)AccessTools.Field(typeof(BaseAi), "m_LastDamageBodyPart").GetValue(ba);
+                    BaseAi.DamageSide damageSide = ba.m_LastDamageSide;
+
+                    int Part = ba.m_LastDamageBodyPart;
 
 
-                    System.Object[] temp1 = { damageSide, Part, BaseAi.SetupDamageParamsOptions.None };
-                    AccessTools.Method(typeof(BaseAi), "SetDamageImpactParameter").Invoke(ba, temp1);
-                    System.Object[] temp2 = { AiMode.Dead };                                      //a copy the game code
-                    AccessTools.Method(typeof(BaseAi), "SetAiMode").Invoke(ba, temp2);
+ 
+                    ba.SetDamageImpactParameter(damageSide, Part, BaseAi.SetupDamageParamsOptions.None);  //a copy the game code
+                    ba.SetAiMode(AiMode.Dead);
+
                     // __instance.m_ElapsedBleedingOutMinutes = float.PositiveInfinity;                                                                             //but tricking the base code did not work                 
                 }
             }
@@ -64,13 +64,9 @@ namespace Bleeding_RV
 
         internal static void Log(string message)
         {
-            Debug.LogFormat("[" + NAME + "] {0}", message);
+            Debug.Log( message);
         }
 
-        internal static void Log(string message, params object[] parameters)
-        {
-            string preformattedMessage = string.Format("[" + NAME + "] {0}", message);
-            Debug.LogFormat(preformattedMessage, parameters);
-        }
+
     }
 }
