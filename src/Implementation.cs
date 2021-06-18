@@ -1,16 +1,13 @@
 ﻿using UnityEngine;
-using Harmony;
+using MelonLoader;
 
 namespace Bleeding_RV
 {
-    public class Implementation
+    public class Implementation : MelonMod
     {
-        private const string NAME = "Bleeding_RV";
-
-
-        public static void OnLoad()
+        public override void OnApplicationStart()
         {
-            Log("Version " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);
+            Debug.Log($"[{Info.Name}] version {Info.Version} loaded!");
         }
 
         public static void UpdateWounds(BaseAi ba, float mins)
@@ -66,7 +63,5 @@ namespace Bleeding_RV
         {
             Debug.Log( message);
         }
-
-
     }
 }

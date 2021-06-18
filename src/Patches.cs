@@ -1,4 +1,4 @@
-﻿using Harmony;
+﻿using HarmonyLib;
 using System;
 
 
@@ -96,12 +96,12 @@ namespace Bleeding_RV
             }
 
             //not finished
-            Implementation.Log("m_BleedOutMinutes:"+ __result.m_bodyPart.ToString());
+            //Implementation.Log("m_BleedOutMinutes:"+ __result.m_bodyPart.ToString());
 
-            Implementation.Log("m_BleedOutMinutes: " + __result.m_BleedOutMinutes.ToString());
-            Implementation.Log("m_BleedOutMinutesForArrow: " + __result.m_BleedOutMinutesForArrow.ToString());
-            Implementation.Log("m_BleedOutMinutesForRevolver: " + __result.m_BleedOutMinutesForRevolver.ToString());
-            Implementation.Log("m_BleedOutMinutesForFlareGunRound: " + __result.m_BleedOutMinutesForFlareGunRound.ToString());
+            //Implementation.Log("m_BleedOutMinutes: " + __result.m_BleedOutMinutes.ToString());
+            //Implementation.Log("m_BleedOutMinutesForArrow: " + __result.m_BleedOutMinutesForArrow.ToString());
+            //Implementation.Log("m_BleedOutMinutesForRevolver: " + __result.m_BleedOutMinutesForRevolver.ToString());
+            //Implementation.Log("m_BleedOutMinutesForFlareGunRound: " + __result.m_BleedOutMinutesForFlareGunRound.ToString());
 
 
             //Implementation.Log(BleedOutMintues.ToString() + "     " + __instance.m_CurrentHP.ToString());
@@ -124,8 +124,6 @@ namespace Bleeding_RV
                 num -= 1;   
             }
             Implementation.UpdateWounds(__instance, num);
-
-
         }
     }
 }
