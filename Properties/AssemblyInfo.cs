@@ -17,5 +17,12 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyVersion("2.1.0")]
 [assembly: AssemblyFileVersion("2.1.0")]
 
-[assembly: MelonInfo(typeof(Bleeding_RV.Implementation), "Bleeding_RV", "2.1.0", "Deus")]
+[assembly: MelonInfo(typeof(Bleeding_RV.Implementation), BuildInfo.ModName, BuildInfo.ModVersion, BuildInfo.ModAuthor)]
 [assembly: MelonGame("Hinterland", "TheLongDark")]
+
+internal static class BuildInfo
+{
+    internal const string ModName = "Bleeding_RV";
+    internal const string ModAuthor = "Deus";
+    internal const string ModVersion = "3.0.0";
+}

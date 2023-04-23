@@ -1,13 +1,15 @@
 ﻿using UnityEngine;
 using MelonLoader;
+using Il2Cpp;
 
 namespace Bleeding_RV
 {
     public class Implementation : MelonMod
     {
-        public override void OnApplicationStart()
+        public override void OnInitializeMelon()
         {
-            Debug.Log($"[{Info.Name}] version {Info.Version} loaded!");
+            Debug.Log($"[{Info.Name}] version {Info.Version} loaded");
+            new MelonLoader.MelonLogger.Instance($"{Info.Name}").Msg($"Version {Info.Version} loaded");
         }
 
         public static void UpdateWounds(BaseAi ba, float mins)
@@ -61,7 +63,7 @@ namespace Bleeding_RV
 
         internal static void Log(string message)
         {
-            Debug.Log( message);
+            Debug.Log(message);            
         }
     }
 }
